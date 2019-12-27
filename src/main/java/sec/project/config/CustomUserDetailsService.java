@@ -38,6 +38,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         account.setPassword("$2a$10$nKOFU.4/iK9CqDIlBkmMm.WZxy2XKdUSlImsG8iKsAP57GMcXwLTS");
         accountRepository.save(account);
 
+        //let's add another test account to be able to test more owasp issues.
+        account = new Account();
+        account.setUsername("john");
+        account.setPassword("$2a$10$nKOFU.4/iK9CqDIlBkmMm.WZxy2XKdUSlImsG8iKsAP57GMcXwLTS");
+        accountRepository.save(account);
+
         
         
     }
