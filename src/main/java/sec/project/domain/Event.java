@@ -15,8 +15,10 @@ public class Event extends AbstractPersistable<Long> implements Comparable<Event
     //private Double price;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<EventSignup> eventSignups;
+    //private List<EventSignup> eventSignups;
+    private List<Signup> signups;
 
+    /*
     public List<EventSignup> getEventSignups() {
         return eventSignups;
     }
@@ -24,7 +26,15 @@ public class Event extends AbstractPersistable<Long> implements Comparable<Event
     public void setEventSignups(List<EventSignup> eventSignups) {
         this.eventSignups = eventSignups;
     }
+    */
 
+    public List<Signup> getSignups() {
+        return signups;
+    }
+
+    public void setSignups(List<Signup> signups) {
+        this.signups = signups;
+    }
     
     public Event() {
     }

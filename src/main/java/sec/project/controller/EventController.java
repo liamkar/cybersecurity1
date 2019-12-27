@@ -74,7 +74,8 @@ public class ItemController {
         
         
         //model.addAttribute("signups", eventRepository.getOne(eventId));
-        model.addAttribute("signups", event.getEventSignups());
+        //model.addAttribute("signups", event.getEventSignups());
+        model.addAttribute("signups", event.getSignups());
         model.addAttribute("event", event);
         
         return "form";

@@ -1,11 +1,15 @@
 package sec.project.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Signup extends AbstractPersistable<Long> {
 
+    //@ManyToOne
+    //private Event event;
+    
     private String name;
     private String address;
 
