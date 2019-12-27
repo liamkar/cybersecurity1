@@ -9,7 +9,7 @@
         <span>Sign upped folks:</span>
         <ul>
             <li th:each="singup : ${event.signups}">
-                <span th:text="${singup.name}" ></span>
+                <span th:text="${singup.name}" ></span><span th:utext="${singup.address}" ></span>
             </li>
         </ul>
         
