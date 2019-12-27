@@ -11,8 +11,7 @@
 
         <ul>
             <li th:each="event : ${events}">
-                <span th:text="${event.name}">event</span> 
-                <a th:href="@{/events/{id}(id=${event.id})}"></a>
+                <a th:text="${event.name}" th:href="@{/events/{id}(id=${event.id})}">event</a>
             </li>
         </ul>
 
