@@ -7,10 +7,13 @@ package sec.project.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import sec.project.repository.EventRepository;
     
 
 /**
@@ -20,13 +23,48 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EventController {
     
-    private List<String> list;
+    private List<String> events;
 
     public EventController() {
-        this.list = new ArrayList<>();
-        this.list.add("Hello world!");
+        this.events = new ArrayList<>();
+        this.events.add("Bike tour around Helsinki!");
+        this.events.add("Moonlight Half Marathon");
+        this.events.add("Jukolan viesti");
+        this.events.add("Tour de ski");
     }
 
+  /*
+    package sec.webshop.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import sec.webshop.repository.ItemRepository;
+*/
+    
+    /*
+@Controller
+public class ItemController {
+*/
+    
+    
+    
+    @Autowired
+    private EventRepository eventRepository;
+
+    @RequestMapping(value = "/events", method = RequestMethod.GET)
+    public String list(Model model) {
+        model.addAttribute("events", eventRepository.findAll());
+        //model.addAttribute("events", events);
+        return "events";
+    }
+}
+
+    
+    
+    
     /*
     @RequestMapping("/")
     public String home(Model model, @RequestParam(required = false) String content) {
@@ -42,5 +80,5 @@ public class EventController {
         return "index";
     }
     */
-}
+
 
