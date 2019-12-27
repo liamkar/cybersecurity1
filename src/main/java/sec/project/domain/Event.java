@@ -1,7 +1,11 @@
 package sec.project.domain;
 
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -10,6 +14,18 @@ public class Event extends AbstractPersistable<Long> implements Comparable<Event
     private String name;
     //private Double price;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<EventSignup> eventSignups;
+
+    public List<EventSignup> getEventSignups() {
+        return eventSignups;
+    }
+
+    public void setEventSignups(List<EventSignup> eventSignups) {
+        this.eventSignups = eventSignups;
+    }
+
+    
     public Event() {
     }
 
