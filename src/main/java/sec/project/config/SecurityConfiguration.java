@@ -70,9 +70,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         http.authorizeRequests()
                 .antMatchers("/h2-console/*").permitAll()
-                //en noo nyt kylla yhtaan varma, voiko nain sanoa, kopioitu official doceista.
+                
+                //.anyRequest().authenticated();
+        //en noo nyt kylla yhtaan varma, voiko nain sanoa, kopioitu official doceista.
                 //.antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated();
+        
+                //PROTECTS FROM BROKEN AUTHENTICATION as requires authentication to all pages.
+                //.anyRequest().authenticated();
+                //VULNERABILITY, as we have missed to write "done" and also the plain /events, allowing any user
+                //to access events list without logging in. At least in this context this is very stupid to 
+                //start writing all of these paths separately, but this was done only for demonstrating broken access control
+                //OWASP issue.
+                .antMatchers("/", "/home", "/form", "/events/*").authenticated();
+                
+        
         //http.formLogin()
                 //.permitAll();
         //copy paste official doceista, jotta voitaisiin jotenkin handlata login ja logout
