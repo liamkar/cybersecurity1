@@ -64,17 +64,19 @@ public class ItemController {
     @Autowired
     private EventRepository eventRepository;
     
-    @Autowired
-    private SignupRepository signupRepository;
+    //@Autowired
+    //private SignupRepository signupRepository;
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
     public String list(Principal principal, Model model) {
         model.addAttribute("events", eventRepository.findAll());
+        /*lets refa this somewhere where we should be able to break this for owasp vulnerability.
         Account account = accountRepository.findByUsername(principal.getName());
         
         List<Signup> signups = signupRepository.findById(account.getId());
         
         model.addAttribute("signups", signups);
+        */
         return "events";
     }
     

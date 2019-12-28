@@ -20,7 +20,11 @@
         </ul>
 
         <h1>All your personal signups</h1>
+        <a th:href="@{/signups/{name}(name=${#httpServletRequest.remoteUser})}">link</a>
+        
+        
         <ul>
+            
             <li th:each="signup : ${signups}">
                 <span th:text="${signup.name}">event</span>: <span th:text="${signup.event.name}">event</span>
             </li>

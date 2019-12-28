@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Items</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        
+        <h1>All your personal signups:</h1>
+        <ul>
+            <li th:each="signup : ${signups}">
+                <span th:text="${signup.name}">event</span>: <span th:text="${signup.event.name}">event</span>
+            </li>
+        </ul>
+        
+    </body>
+</html>
