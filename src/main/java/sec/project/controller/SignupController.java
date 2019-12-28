@@ -1,5 +1,6 @@
 package sec.project.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sec.project.domain.Event;
 import sec.project.domain.EventSignup;
 import sec.project.domain.Signup;
+import sec.project.repository.AccountRepository;
 import sec.project.repository.EventRepository;
 import sec.project.repository.SignupRepository;
 
 @Controller
 public class SignupController {
 
-    //@Autowired
-    //private SignupRepository signupRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private EventRepository eventRepository;
@@ -33,7 +35,7 @@ public class SignupController {
     }
 
     @RequestMapping(value = "/form", method = RequestMethod.POST)
-    public String submitForm(@RequestParam Long eventId, @RequestParam String name, @RequestParam String address) {
+    public String submitForm(Principal principal, @RequestParam Long eventId, @RequestParam String name, @RequestParam String address) {
         //signupRepository.save(new Signup(name, address));
         Event event = eventRepository.getOne(eventId);
         
@@ -51,6 +53,8 @@ public class SignupController {
         
         //EventSignup newEventSignup = new EventSignup();
         Signup signup = new Signup(name, address);
+        signup.setAccount(accountRepository.findByUsername(principal.getName()));
+        signup.setEvent(event);
         //signupRepository.
         
         /*

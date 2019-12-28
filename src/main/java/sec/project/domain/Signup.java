@@ -7,8 +7,11 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Signup extends AbstractPersistable<Long> {
 
-    //@ManyToOne
-    //private Event event;
+    @ManyToOne
+    private Event event;
+    
+    @ManyToOne
+    private Account account;
     
     private String name;
     private String address;
@@ -38,5 +41,23 @@ public class Signup extends AbstractPersistable<Long> {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+    
+    
 
 }

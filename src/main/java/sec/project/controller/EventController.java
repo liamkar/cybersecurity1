@@ -5,6 +5,7 @@
  */
 package sec.project.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import sec.project.domain.Account;
 import sec.project.domain.Event;
+import sec.project.domain.Signup;
+import sec.project.repository.AccountRepository;
 import sec.project.repository.EventRepository;
+import sec.project.repository.SignupRepository;
     
 
 /**
@@ -53,26 +58,34 @@ import sec.webshop.repository.ItemRepository;
 public class ItemController {
 */
     
-    
+    @Autowired
+    private AccountRepository accountRepository;
     
     @Autowired
     private EventRepository eventRepository;
+    
+    @Autowired
+    private SignupRepository signupRepository;
 
     @RequestMapping(value = "/events", method = RequestMethod.GET)
-    public String list(Model model) {
+    public String list(Principal principal, Model model) {
         model.addAttribute("events", eventRepository.findAll());
-        //model.addAttribute("events", events);
+        Account account = accountRepository.findByUsername(principal.getName());
+        
+        List<Signup> signups = signupRepository.findById(account.getId());
+        
+        model.addAttribute("signups", signups);
         return "events";
     }
     
     @RequestMapping(value = "/events/{eventId}", method = RequestMethod.GET)
-    public String eventSignups(@PathVariable Long eventId, Model model) {
+    public String eventSignups(Principal principal, @PathVariable Long eventId, Model model) {
         //shoppingCart.addToCart(itemRepository.findOne(itemId));
-        //return "redirect:/cart";
+        //return "redirect:/cart";        
+                
         
         Event event = eventRepository.getOne(eventId);
-        
-        
+                
         //model.addAttribute("signups", eventRepository.getOne(eventId));
         //model.addAttribute("signups", event.getEventSignups());
         model.addAttribute("signups", event.getSignups());
@@ -80,8 +93,6 @@ public class ItemController {
         
         return "form";
     }
-
-    
     
 }
 
