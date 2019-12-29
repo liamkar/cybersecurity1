@@ -14,16 +14,7 @@ import sec.project.domain.Signup;
  */
 //Allright, the naming of these interfaces and implementing classes is absolutely crucial, they have to correspond the signuprepository...
 public interface SignupRepositoryCustom {
-    //public void getSignupsByName();
     List<Signup> getSignupsByAccountUsername(String name);
 }
 
-
-/*
-public interface EmployeeRepositoryCustom {
- 
-    List<Employee> getFirstNamesLikeAndBonusBigger(String firstName, Double bonusAmount);
- 
-}
-*/
 

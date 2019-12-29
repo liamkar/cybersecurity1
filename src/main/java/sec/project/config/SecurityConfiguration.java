@@ -11,50 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-/*
-
-@Configuration
-@EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // no real security at the moment
-        http.authorizeRequests()
-                .anyRequest().permitAll();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-}
-*/
-
-
-
-/*
-import java.util.Arrays;
-import javax.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-import sec.project.domain.Account;
-import sec.project.repository.AccountRepository;
-*/
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -65,15 +21,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // you can access the h2-console through /h2-console
-        http.csrf().disable();
+        
+        //http.csrf().disable();
         http.headers().frameOptions().sameOrigin();
         
         http.authorizeRequests()
                 .antMatchers("/h2-console/*").permitAll()
                 
                 //.anyRequest().authenticated();
-        //en noo nyt kylla yhtaan varma, voiko nain sanoa, kopioitu official doceista.
-                //.antMatchers("/", "/home").permitAll()
         
                 //PROTECTS FROM BROKEN AUTHENTICATION as requires authentication to all pages.
                 //.anyRequest().authenticated();
@@ -84,8 +39,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home", "/form", "/events/*").authenticated();
                 
         
-        //http.formLogin()
-                //.permitAll();
         //copy paste official doceista, jotta voitaisiin jotenkin handlata login ja logout
         http.formLogin()
                 .loginPage("/login")
@@ -93,32 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
             .logout()
                 .permitAll();
-        
-        //TODO:mistä systeemi nyt tietää, että login kutsulla sitten mäpätään loging.html sivuun??
-           //registry.addViewController("/login").setViewName("login");
-        
-        
-        //malliksi mitä official doceissa on tehty:
-        /*
-            http
-      .authorizeRequests()
-        .antMatchers("/", "/home").permitAll()
-        .anyRequest().authenticated()
-        .and()
-      .formLogin()
-        .loginPage("/login")
-        .permitAll()
-        .and()
-      .logout()
-        .permitAll();
-        
-        */
-        
-        
-        
-        
-        
-        
+                
     }
 
     @Autowired

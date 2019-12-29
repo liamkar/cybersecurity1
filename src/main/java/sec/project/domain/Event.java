@@ -12,21 +12,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Event extends AbstractPersistable<Long> implements Comparable<Event> {
 
     private String name;
-    //private Double price;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    //private List<EventSignup> eventSignups;
     private List<Signup> signups;
-
-    /*
-    public List<EventSignup> getEventSignups() {
-        return eventSignups;
-    }
-
-    public void setEventSignups(List<EventSignup> eventSignups) {
-        this.eventSignups = eventSignups;
-    }
-    */
 
     public List<Signup> getSignups() {
         return signups;
